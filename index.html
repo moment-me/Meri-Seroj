@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seroj & Meri</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@1,400;1,500&family=Assistant:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -294,6 +300,8 @@
     #sound-btn { width: 48px; height: 48px; }
   }
 </style>
+</head>
+<body>
 
 <audio id="bg-audio" loop preload="auto">
   <source src="https://cdn.shopify.com/s/files/1/0962/1140/3055/files/frank-sinatra-i-love-you-baby-1mp3_Z9bdBRlK.mp3?v=1777404771" type="audio/mpeg">
@@ -653,7 +661,6 @@ var STRINGS = {
 
 var currentLang = 'hy';
 
-// Core translation engine - called from both the envelope dropdown and the fixed pill
 function applyLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
@@ -698,7 +705,6 @@ function applyLang(lang) {
   }, 150);
 }
 
-// Called from the fixed page dropdown (after envelope)
 function togglePageLang() {
   var dd = document.getElementById('page-lang-dropdown');
   dd.classList.toggle('open');
@@ -708,7 +714,6 @@ function pageSetLang(lang, label, optionEl) {
   document.getElementById('page-lang-label').textContent = label;
   document.querySelectorAll('.page-lang-option').forEach(function(o) { o.classList.remove('active'); });
   optionEl.classList.add('active');
-  // Sync envelope dropdown too
   document.querySelectorAll('.env-lang-option').forEach(function(o) { o.classList.remove('active'); });
   var envOpt = document.querySelector('.env-lang-option[onclick*="' + lang + '"]');
   if (envOpt) envOpt.classList.add('active');
@@ -716,31 +721,24 @@ function pageSetLang(lang, label, optionEl) {
   if (lang !== currentLang) applyLang(lang);
 }
 
-// Called from the fixed pill (after envelope) - kept for legacy, now unused directly
 function setLang(lang, triggerEl) {
   if (lang == currentLang) return;
   applyLang(lang);
 }
 
-// --- Envelope dropdown helpers ---
 function toggleEnvLang() {
   var dd = document.getElementById('env-lang-dropdown');
   dd.classList.toggle('open');
 }
 
 function envSetLang(lang, label, optionEl) {
-  // Update envelope dropdown label
   document.getElementById('env-lang-label').textContent = label;
-  // Mark active option in envelope dropdown
   document.querySelectorAll('.env-lang-option').forEach(function(o) { o.classList.remove('active'); });
   optionEl.classList.add('active');
-  // Close envelope dropdown
   document.getElementById('env-lang-dropdown').classList.remove('open');
-  // Apply translations
   if (lang !== currentLang) applyLang(lang);
 }
 
-// Close dropdowns when clicking outside
 document.addEventListener('click', function(e) {
   var envDd = document.getElementById('env-lang-dropdown');
   if (envDd && !envDd.contains(e.target)) { envDd.classList.remove('open'); }
@@ -918,7 +916,6 @@ window.openMe = function() {
   setTimeout(function() { env.style.display = 'none'; }, 1100);
   setTimeout(function() {
     _soundBtn.style.display = 'flex';
-    // Show page dropdown and sync label/active state to whatever lang was chosen on envelope
     var switcher = document.getElementById('lang-switcher');
     switcher.style.display = 'block';
     var labelMap = { hy: '🇦🇲 ՀԱՅ', ru: '🇷🇺 РУС', en: '🇬🇧 ENG' };
@@ -932,3 +929,5 @@ window.openMe = function() {
 };
 
 </script>
+</body>
+</html>
