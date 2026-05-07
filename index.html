@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@1,400;1,500&family=Assistant:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-  html, body { margin: 0; padding: 0; width: 100%; background: #ffffff !important; font-family: ui-rounded; overflow-x: hidden; }
+  html, body { margin: 0; padding: 0; width: 100%; max-width: 100%; background: #ffffff !important; font-family: ui-rounded; overflow-x: hidden; }
+  body { position: relative; }
   * { box-sizing: border-box; }
 
   /* -- ENVELOPE LANGUAGE DROPDOWN -- */
@@ -148,11 +149,13 @@
 
   /* -- ENVELOPE -- */
   #EnvelopeGate {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: 9999; cursor: pointer; display: flex; flex-direction: column; background: #53332A;
     transition: background 0.4s ease; overflow: hidden;
+    margin: 0; padding: 0;
   }
-  .env-part { width: 100%; height: 50vh; overflow: hidden; transition: transform 1s ease-in-out; }
+  .env-part { width: 100vw; height: 50vh; overflow: hidden; transition: transform 1s ease-in-out; flex-shrink: 0; }
+  .env-part img { width: 100vw !important; height: 100% !important; object-fit: cover; display: block; margin: 0; padding: 0; }
   .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; transition: opacity 0.4s; animation: sealWiggle 2.5s ease-in-out infinite; }
   .is-open .env-top { transform: translateY(-100%); }
   .is-open .env-bottom { transform: translateY(100%); }
